@@ -1,17 +1,17 @@
-# cards-reader
+# CARDS-reader
 
 ## A library of methods to analyze the CARDS framework 
 
-The CARDS-Reader is a library of scripts and methods that are built to analyze
+The CARDS-reader is a library of scripts and methods that are built to analyze
 and work with CARDS data. It contains a series of methods as well a few ready-made
 apps scripts.
 
 ## Requirements
 
-CARDS-Reader is built to work in python 3. Specifically anything above 3.5 should 
+CARDS-reader is built to work in python 3. Specifically anything above 3.5 should 
 work. 
 
-To use CARDS-Reader, the following other python packages must also be installed: 
+To use CARDS-reader, the following other python packages must also be installed: 
 * Enspara (download at https://github.com/bowman-lab/enspara)
 * MDTraj (download at mdtraj.org)
 
@@ -20,7 +20,7 @@ but are easily available with most package managers such as Anaconda.
 
 ## Usage 
 
-CARDS-Reader was built with the enspara package in mind, specifically to analyze the 
+CARDS-reader was built with the enspara package in mind, specifically to analyze 
 CARDS output from enspara. 
 
 ## References

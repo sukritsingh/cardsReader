@@ -142,7 +142,7 @@ def main(args):
 
 
     resi_map = get_resi_mapping(indices, topology)
-    print("Obtained a mapping for each dihedral to it's residue")
+    print("Obtained a mapping for each dihedral to its residue")
 
     residue_level_entropies = sum_entropies_by_residue(resi_map, entropy_vals)
 

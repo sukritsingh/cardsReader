@@ -2,7 +2,7 @@
 # @Author: Sukrit Singh
 # @Date:   2018-11-02 16:14:22
 # @Last Modified by:   Sukrit Singh
-# @Last Modified time: 2018-11-02 16:59:33
+# @Last Modified time: 2018-12-12 11:52:44
 
 """
 This script extracts the Shannon entropy of dihedral motion from the CARDS results
@@ -20,7 +20,7 @@ import pandas as pd
 
 ################# INPUT PARSER #####################
 parser = argparse.ArgumentParser(description="""
-Calculation of all-dihedral correlations between residues
+Calculation of Shannon entropy per residue
 """)
 
 

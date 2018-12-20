@@ -2,12 +2,37 @@
 # @Author: sukrit
 # @Date:   2018-01-11 16:32:37
 # @Last Modified by:   Sukrit Singh
-# @Last Modified time: 2018-11-02 17:00:51
+# @Last Modified time: 2018-12-12 12:04:48
+
+"""This apps script works to extract communication per residue to a target site
+using a single holistic MI matrix. 
+"""
 
 
 import numpy as np
 from cardsReader.analysis import corrAnalysis as ca
+import argparse
 
+######################## 
+
+parser = argparse.ArgumentParser(description="""
+Calculation of all-dihedral correlations between residues
+""")
+
+
+parser.add_argument('-m','--matrix', default=os.getcwd(), 
+                        help = "Path to .dat file containing holistic matrix")
+parser.add_argument('-i','--indices', default=os.getcwd(), 
+                        help = "Mapping file defining residue ID per MI matrix element")
+parser.add_argument('-t','--topology', default=os.getcwd(), 
+                        help = "Path to topology file of simulation set")
+parser.add_argument('-r','--residues',  nargs='+', 
+                        help="<Required> Indices of residues defining target site")
+parser.add_argument('-o', '--output', default="MI_targetSite.dat", 
+                        help = "Name of output file for target site communication")
+
+
+####################### FUNCTIONS #############################
 
 def main_method(datafile, pdbFile, resi_file, resiSet):
     allResis = np.loadtxt(resi_file)
@@ -26,21 +51,18 @@ def main_method(datafile, pdbFile, resi_file, resiSet):
 
     return final
 
+
 if __name__ == '__main__':
-    # Provide the path to holistic matrix
-    datafile = "/home/sukrit/work/gq/10195_gq_gdp_v/cards/data/fracMI_Hol_AllDihedrals.dat"
-    # Provide path to PDB file
-    pdbfile = "/home/sukrit/work/gq/10195_gq_gdp_v/cards/data/protein_2.pdb"
-    # Provide path to mapping file (MAKE SURE IT IS RESIDUE-BASED)
-    resi_file = "/home/sukrit/work/gq/10195_gq_gdp_v/cards/data/gq_10195_resSeq_Mapping.dat"
+    #Collect Inputs 
+    args = parser.parse_args()
+    datafile = args.matrix
+    pdbFile = args.topology
+    resi_file = args.indices
+    resiSet = args.residues
+    outName = args.output
 
-    # Residue set of interest
-    #setOfinterest =  np.linspace(6, 334, 338)
-    resiSet = np.asarray([56,60,67,75,78,185,187,190,192,193]) 
-    
 
-    # Aromatics
-    #resiSet = [454, 482, 492, 560, 579]
-    #[220+221+224+225+244+276+279+280+283+286]#
     data = main_method(datafile, pdbfile, resi_file, np.asarray(resiSet))
-    np.savetxt("gq_10195_holMI_normalized_yMBindingSite_wError.dat", data)
+    np.savetxt(outName, data)
+
+

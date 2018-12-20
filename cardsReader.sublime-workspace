@@ -4,6 +4,58 @@
 		"selected_items":
 		[
 			[
+				"data",
+				"datafile"
+			],
+			[
+				"output",
+				"output_name"
+			],
+			[
+				"T",
+				"T"
+			],
+			[
+				"resseq",
+				"resSeqList"
+			],
+			[
+				"padnas",
+				"pandas_out_dihedrals"
+			],
+			[
+				"entropy",
+				"entropy_vals"
+			],
+			[
+				"ent",
+				"entropy_vals"
+			],
+			[
+				"topo",
+				"topology"
+			],
+			[
+				"enropes",
+				"entropies_residue"
+			],
+			[
+				"unie",
+				"unique_resi_list"
+			],
+			[
+				"unique",
+				"unique_resi_list"
+			],
+			[
+				"entrop",
+				"entropy_vals"
+			],
+			[
+				"file",
+				"fileName"
+			],
+			[
 				"newMI",
 				"newMIError\tstatement"
 			],
@@ -388,10 +440,6 @@
 				"n_states2"
 			],
 			[
-				"file",
-				"filetype"
-			],
-			[
 				"ax",
 				"ax"
 			],
@@ -466,67 +514,16 @@
 			[
 				"s62f",
 				"s62f_bound"
-			],
-			[
-				"mad",
-				"calc_MAD_based_std_score"
-			],
-			[
-				"joint_en",
-				"joint_entropies"
-			],
-			[
-				"convert_holJoint",
-				"convert_holJointCounts_to_EntrA_StrB_Counts"
-			],
-			[
-				"convert_holistic",
-				"convert_holitsicCounts_to_EntrCounts"
-			],
-			[
-				"hol_",
-				"convert_holisticCounts_to_StrCounts"
-			],
-			[
-				"intermediat",
-				"intermediate"
-			],
-			[
-				"second",
-				"secondColumn"
-			],
-			[
-				"first",
-				"firstColumn"
-			],
-			[
-				"PROT_",
-				"PROT_8core_md"
-			],
-			[
-				"wt",
-				"wt"
-			],
-			[
-				"su",
-				"sum_dihedrals_by_resis"
-			],
-			[
-				"remove",
-				"remove_diags"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"contents": "# cards-reader\n\n## A library of methods to analyze the CARDS framework \n\nThe CARDS-Reader is a library of scripts and methods that are built to analyze\nand work with CARDS data. It contains a series of methods as well a few ready-made\napps scripts.\n\n## Requirements\n\nCARDS-Reader is built to work in python 3. Specifically anything above 3.5 should \nwork. \n\nTo use CARDS-Reader, the following other python packages must also be installed: \n* Enspara (download at https://github.com/bowman-lab/enspara)\n* MDTraj (download at mdtraj.org)\n\nOther standard libraries (eg. numpy, scipy, scikit-learn) should also be installed, \nbut are easily available with most package managers such as Anaconda. \n\n## Usage \n\nCARDS-Reader was built with the enspara package in mind, specifically to analyze the \nCARDS output from enspara. \n\n## References\n\nTo learn more about CARDS - please see: \n* Sukrit Singh and Gregory R. Bowman, \"Quantifying allosteric communication via \nboth concerted structural changes and conformational disorder with CARDS\".\nJournal of Chemical Theory and Computation 2017 13 (4), 1509-1517\nDOI: 10.1021/acs.jctc.6b01181 \n\n",
 			"file": "README.md",
-			"file_size": 1128,
-			"file_write_time": 131854097275044139,
 			"settings":
 			{
-				"buffer_size": 1130,
+				"buffer_size": 1125,
 				"line_ending": "Unix"
 			}
 		},
@@ -534,7 +531,7 @@
 			"file": "apps/calc_dihedralMI_to_resiSet.py",
 			"settings":
 			{
-				"buffer_size": 2303,
+				"buffer_size": 2106,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -543,7 +540,16 @@
 			"file": "apps/generate_holistic_matrix.py",
 			"settings":
 			{
-				"buffer_size": 3618,
+				"buffer_size": 2517,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "apps/extract_dihedral_entropy.py",
+			"settings":
+			{
+				"buffer_size": 5859,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -718,6 +724,7 @@
 	],
 	"file_history":
 	[
+		"/home/sukrit/bowmore/G-protein-topol.pdb",
 		"/home/sukrit/work/scripts/cards-reader/analysis/corrAnalysis.py",
 		"/home/sukrit/work/scripts/cards-reader/analysis/correlator_v2.py",
 		"/home/sukrit/.bashrc",
@@ -844,8 +851,7 @@
 		"/home/sukrit/scripts/cards/analysis/convert_MI_to_distance.py",
 		"/tmp/rsub-d_3q4e/pr",
 		"/tmp/rsub-0edssy/em.mdp",
-		"/home/sukrit/scripts/cards/analysis/normalize_MI_Matrices.py",
-		"/home/sukrit/work/gq/10195_gq_gdp_v/cards/analysis/gq_10195_holMI_Helix5.dat"
+		"/home/sukrit/scripts/cards/analysis/normalize_MI_Matrices.py"
 	],
 	"find":
 	{
@@ -863,6 +869,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"help"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -880,7 +887,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -889,15 +896,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1130,
+						"buffer_size": 1125,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1130,
-								1130
+								1125,
+								1125
 							]
 						],
 						"settings":
@@ -955,7 +962,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
@@ -964,15 +971,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2303,
+						"buffer_size": 2106,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1207,
-								1207
+								1594,
+								1594
 							]
 						],
 						"settings":
@@ -1029,10 +1036,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 264.0,
+						"translation.y": 517.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -1041,15 +1048,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3618,
+						"buffer_size": 2517,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1557,
-								1557
+								2348,
+								2348
 							]
 						],
 						"settings":
@@ -1105,10 +1112,87 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 594.0,
+						"translation.y": 66.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "apps/extract_dihedral_entropy.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5859,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								819,
+								819
+							]
+						],
+						"settings":
+						{
+							"c_time":
+							[
+								128,
+								3,
+								99,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								113,
+								0,
+								67,
+								10,
+								7,
+								226,
+								11,
+								2,
+								16,
+								14,
+								22,
+								6,
+								254,
+								223,
+								113,
+								1,
+								133,
+								113,
+								2,
+								82,
+								113,
+								3,
+								46
+							],
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
@@ -1120,7 +1204,7 @@
 	},
 	"input":
 	{
-		"height": 34.0
+		"height": 43.0
 	},
 	"layout":
 	{
@@ -1181,7 +1265,7 @@
 		[
 			[
 				"",
-				"~/work/scripts/enspara/enspara.sublime-project"
+				"~/work/scripts/project_defs/pymol.sublime-project"
 			],
 			[
 				"pymol",

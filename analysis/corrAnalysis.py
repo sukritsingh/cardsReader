@@ -363,7 +363,7 @@ def compute_errorbar_MI(data, bootNo):
 		dataRS = resample(data)
 		newData.append(dataRS)
 
-	return np.mean(newData), np.std(newData[newData!=0.0])
+	return np.mean(newData), np.std(newData[newData!=0.0])/25
 
 def compute_dihedral_based_fanoFactor_MI_to_resiSet(data, resiSet, allResis, pdbFile, cutoff=3.0):
 	"""

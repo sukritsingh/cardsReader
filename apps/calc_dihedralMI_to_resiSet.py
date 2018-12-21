@@ -2,13 +2,13 @@
 # @Author: sukrit
 # @Date:   2018-01-11 16:32:37
 # @Last Modified by:   Sukrit Singh
-# @Last Modified time: 2018-12-21 17:17:33
+# @Last Modified time: 2018-12-21 17:21:51
 
 """This apps script works to extract communication per residue to a target site
 using a single holistic MI matrix. 
 """
 
-
+import os
 import numpy as np
 from cardsReader.analysis import corrAnalysis as ca
 import argparse

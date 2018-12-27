@@ -31,7 +31,6 @@ from scipy.stats import pearsonr
 from scipy.stats import spearmanr
 from scipy.stats import skew
 from sklearn.utils import resample
-warnings.filterwarnings("ignore")
 
 ################ FUNCTIONS ###################
 
@@ -338,18 +337,19 @@ def compute_MI_setA_to_setB_error(data, setAResis, resiSet, allResis):
 		for j in range(resiSet_indices.shape[0]):
 			val = data[setA_indices[i],resiSet_indices[j]]
 			listOfVals.append(val)
-
+		
 	print("Obtained all values for Residue")
+	
 
 	# ListOfVals represents the full set of MI values 
 	allVals = np.asarray(listOfVals)
 	MI_val = np.mean(allVals)/(resiSet_indices.shape[0])
-	MI_mean, MI_error = compute_errorbar_MI(allVals, 10)
+	MI_mean, MI_error = compute_errorbar_MI(allVals, 10, resiSet_indices.shape[0])
 
-	return MI_val, MI_error
+	return MI_mean, MI_error
 
 
-def compute_errorbar_MI(data, bootNo):
+def compute_errorbar_MI(data, bootNo, numResis):
 	"""
 	Given a set of data values (specifically the complete set of MI values
 	to a target site) - this function will take all those values, resample
@@ -360,10 +360,11 @@ def compute_errorbar_MI(data, bootNo):
 	newData = []
 
 	for i in range(bootNo):
-		dataRS = resample(data)
+		dataRS = resample(data, replace=False)
 		newData.append(dataRS)
 
-	return np.mean(newData), np.std(newData[newData!=0.0])/25
+	#return np.mean(data), np.std(data[data!=0.0])/25 
+	return np.mean(newData[newData!= 0.0]), np.std(newData[newData!=0.0])/numResis
 
 def compute_dihedral_based_fanoFactor_MI_to_resiSet(data, resiSet, allResis, pdbFile, cutoff=3.0):
 	"""

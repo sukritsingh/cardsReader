@@ -2,7 +2,7 @@
 # @Author: sukrit
 # @Date:   2018-01-11 16:32:37
 # @Last Modified by:   Sukrit Singh
-# @Last Modified time: 2018-12-21 17:21:51
+# @Last Modified time: 2018-12-27 13:08:29
 
 """This apps script works to extract communication per residue to a target site
 using a single holistic MI matrix. 
@@ -12,6 +12,20 @@ import os
 import numpy as np
 from cardsReader.analysis import corrAnalysis as ca
 import argparse
+import matplotlib.pyplot as plt
+
+############ PLOTTING PARAMS ###########
+plt.rcParams['font.family'] = 'serif'
+plt.rcParams['font.serif'] = 'Ubuntu'
+plt.rcParams['font.monospace'] = 'Ubuntu Mono'
+plt.rcParams['font.size'] = 17
+plt.rcParams['axes.labelsize'] = 17
+plt.rcParams['axes.labelweight'] = 'bold'
+plt.rcParams['axes.titlesize'] = 17
+plt.rcParams['xtick.labelsize'] = 15
+plt.rcParams['ytick.labelsize'] = 15
+plt.rcParams['legend.fontsize'] = 20
+plt.rcParams['figure.titlesize'] = 12
 
 ######################## 
 
@@ -46,8 +60,8 @@ def main_method(datafile, pdbFile, resi_file, resiSet):
     resis = np.unique(allResis)
     final = np.zeros((resis.shape[0], 3))
     final[:, 0] = resis
-    final[:, 1] = corrAmount[:,1]
-    final[:, 2] = corrAmount[:,2]
+    final[:, 1] = corrAmount[:,0]
+    final[:, 2] = corrAmount[:,1]
 
     return final
 
@@ -62,7 +76,21 @@ if __name__ == '__main__':
     outName = args.output
 
 
-    data = main_method(datafile, pdbFile, resi_file, np.asarray(resiSet))
+    data = main_method(datafile, pdbFile, resi_file, np.asarray(resiSet).astype(float))
     np.savetxt(outName, data)
+
+    # Make a plot of the data
+    fig = plt.figure()
+    plt.errorbar(x=data[:,0], y=data[:,1], yerr=data[:,2], lw=1.2, capsize=1.5)
+    plt.xlabel("Residue number")
+    plt.ylabel("MI to target site")
+    plt.xlim(data[0,0], data[-1:,0])
+    fig.set_size_inches(11,7)
+    plt.tight_layout()
+    plt.savefig(outName[:-4]+'.png', dpi=300)
+
+    #plt.show()
+
+
 
 

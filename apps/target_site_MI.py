@@ -2,7 +2,7 @@
 # @Author: sukrit
 # @Date:   2018-01-11 16:32:37
 # @Last Modified by:   Sukrit Singh
-# @Last Modified time: 2018-12-27 13:08:29
+# @Last Modified time: 2018-12-27 13:35:05
 
 """This apps script works to extract communication per residue to a target site
 using a single holistic MI matrix. 
@@ -13,6 +13,7 @@ import numpy as np
 from cardsReader.analysis import corrAnalysis as ca
 import argparse
 import matplotlib.pyplot as plt
+import mdtraj as md
 
 ############ PLOTTING PARAMS ###########
 plt.rcParams['font.family'] = 'serif'
@@ -48,8 +49,21 @@ parser.add_argument('-o', '--output', default="MI_targetSite.dat",
 
 ####################### FUNCTIONS #############################
 
+def convert_inds_to_resis(inds, pdbFile):
+    traj = md.load(pdbFile)
+    resi_ids = np.zeros(inds.shape[0])
+    for i,n in enumerate(inds):
+        atomVal = int(n[1])
+        resi_val = traj.top.atom(atomVal).residue.resSeq
+        resi_ids[i] = resi_val
+
+    return resi_ids
+
 def main_method(datafile, pdbFile, resi_file, resiSet):
-    allResis = np.loadtxt(resi_file)
+    # Process dihedal indices input file 
+    allInds = np.loadtxt(resi_file, delimiter=',')
+    allResis = convert_inds_to_resis(allInds, pdbFile)
+    resis = np.unique(allResis)
     data = np.loadtxt(datafile)
 
     # Neighbor using method
@@ -57,7 +71,7 @@ def main_method(datafile, pdbFile, resi_file, resiSet):
     corrAmount = ca.compute_dihedral_based_MI_to_resiSet_error(
         data, resiSet, allResis, pdbFile, 3.0)
 
-    resis = np.unique(allResis)
+    #resis = np.unique(allResis)
     final = np.zeros((resis.shape[0], 3))
     final[:, 0] = resis
     final[:, 1] = corrAmount[:,0]

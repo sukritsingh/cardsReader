@@ -286,6 +286,19 @@ def compute_MI_setA_to_setB(data, setAResis, resiSet, allResis):
 
 	return MI_val, MI_error
 
+
+def convert_inds_to_resis(inds, pdbFile):
+	traj = md.load(pdbFile)
+	resi_ids = np.zeros(inds.shape[0])
+	for i,n in enumerate(inds):
+		atomVal = int(n[1])
+		resi_val = traj.top.atom(atomVal).residue.resSeq
+		resi_ids[i] = resi_val
+
+	return resi_ids
+
+
+
 def compute_dihedral_based_MI_to_resiSet_error(data, resiSet, allResis, pdbFile, cutoff=3.0):
 	"""
 	This uses the dihedral matrix to compute the MI value from any residue i 
@@ -295,9 +308,12 @@ def compute_dihedral_based_MI_to_resiSet_error(data, resiSet, allResis, pdbFile,
 	dihedrals of r. 
 	allResis refers to the mapping matrix of the all-dihedral matrix value.  
 	"""
+	#print(allResis)
 	resis = np.unique(allResis)
+	#print(resis)
 	neighborList = get_neighbors(pdbFile, resis, cutoff)
 	print("Computed all Neighbors")
+	np.fill_diagonal(data, 0.0)
 	final_MI = np.zeros((resis.shape[0],2))
 
 	for i in range(resis.shape[0]):

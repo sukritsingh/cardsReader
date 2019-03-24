@@ -1,4 +1,4 @@
-# CARDS-reader
+# CARDS-Reader
 
 ## A library of methods to analyze the CARDS framework 
 

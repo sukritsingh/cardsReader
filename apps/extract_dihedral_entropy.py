@@ -2,7 +2,7 @@
 # @Author: Sukrit Singh
 # @Date:   2018-11-02 16:14:22
 # @Last Modified by:   Sukrit Singh
-# @Last Modified time: 2018-12-12 11:52:44
+# @Last Modified time: 2019-03-26 10:52:56
 
 """
 This script extracts the Shannon entropy of dihedral motion from the CARDS results
@@ -96,7 +96,7 @@ def save_dihedral_entropy(entropy_values, resi_map, output_name):
     dihedral_output_array = np.vstack((resi_map, entropy_values)).T
     pandas_out_dihedrals = pd.DataFrame(dihedral_output_array)
     pandas_out_dihedrals.columns = ['residue index', 'dihedral entropy value']
-    pandas_out_dihedrals.to_csv(output_name)
+    pandas_out_dihedrals.to_csv(output_name, index=False)
 
     print("Saved dihedral entropies as "+str(output_name))
 

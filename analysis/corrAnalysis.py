@@ -25,7 +25,7 @@ import pylab
 import warnings
 import mdtraj as md
 #import h5py as h5
-import correlator as corr
+from cardsReader.analysis import correlator as corr
 import math 
 from scipy.stats import pearsonr 
 from scipy.stats import spearmanr

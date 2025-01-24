@@ -57,16 +57,24 @@ def get_resi_mapping(inds_file, top_File):
     multimers), but rather the index according to the topology. 
     """
     inds = np.loadtxt(inds_file, delimiter=",")
-    structure = md.load(top_File)
-    n_resis = structure.top.n_residues
+    if top_File[-7:] == '.prmtop' or top_File[-4:] == '.top':
+        structure = md.load_prmtop(top_File)
+        n_resis = structure.n_residues
+    else:
+        structure = md.load(top_File)
+        n_resis = structure.top.n_residues
     n_dihedrals = inds.shape[0]
     resi_map = np.zeros(n_dihedrals)
     for i, n in enumerate(inds):
         atom_index = n[1]
-        resi_index = structure.top.atom(int(atom_index)).residue.index
+        if top_File[-7:] == '.prmtop' or top_File[-4:] == '.top':
+            resi_index = structure.atom(int(atom_index)).residue.index
+        else:
+            resi_index = structure.top.atom(int(atom_index)).residue.index
         resi_map[i] = resi_index
 
     return resi_map
+
 
 def sum_entropies_by_residue(resi_map, entropies):
     """This function will take the mapping produced in get_resi_mapping and 
@@ -103,10 +111,16 @@ def save_dihedral_entropy(entropy_values, resi_map, output_name):
     return 0 
 
 def get_residue_seqIds(resi_list, top_file):
-    structure = md.load(top_file)
+    if top_file[-7:] == '.prmtop' or top_file[-4:] == '.top':
+        structure = md.load_prmtop(top_file)
+    else:
+        structure = md.load(top_file)
     resSeq_list = np.zeros(resi_list.shape[0])
     for i, n in enumerate(resi_list):
-        resSeq_list[i] = structure.top.residue(int(n)).resSeq
+        if top_file[-7:] == '.prmtop' or top_file[-4:] == '.top':
+            resSeq_list[i] = structure.residue(int(n)).resSeq
+        else:
+            resSeq_list[i] = structure.top.residue(int(n)).resSeq
 
     return resSeq_list
 
@@ -165,6 +179,4 @@ if __name__ == "__main__":
     #trajDir = "/home/sukrit/work/vp35"
     #topologyName = "/home/sukrit/work/vp35/prot_only.pdb"
     main(args)
-
-
 

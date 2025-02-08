@@ -62,7 +62,7 @@ def get_resi_mapping(inds_file, top_File):
     if top_File[-7:] == '.prmtop' or top_File[-4:] == '.top':
         structure = md.load_prmtop(top_File)    # mdtraj.load only supports trajectories, but we only need topology information here
         n_resis = structure.n_residues
-    else:    # non-Amber style topology files
+    else:    # non-Amber-style topology files
         structure = md.load(top_File)    # supports file formats with combined trajectory/topology information, like .pdb
         n_resis = structure.top.n_residues
     n_dihedrals = inds.shape[0]
@@ -70,9 +70,9 @@ def get_resi_mapping(inds_file, top_File):
     for i, n in enumerate(inds):
         atom_index = n[1]
         if top_File[-7:] == '.prmtop' or top_File[-4:] == '.top':
-            resi_index = structure.atom(int(atom_index)).residue.index
+            resi_index = structure.atom(int(atom_index)).residue.index    # if we loaded an Amber-style topology, structure is already a toplogy object
         else:
-            resi_index = structure.top.atom(int(atom_index)).residue.index
+            resi_index = structure.top.atom(int(atom_index)).residue.index    # if we loaded a trajectory, structure.top is the topology object
         resi_map[i] = resi_index
 
     return resi_map
@@ -116,14 +116,14 @@ def get_residue_seqIds(resi_list, top_file):
     # Handle support for Amber-style topology files
     if top_file[-7:] == '.prmtop' or top_file[-4:] == '.top':
         structure = md.load_prmtop(top_file)    # mdtraj.load only supports trajectories, but we only need topology information here
-    else:    # non-Amber style topology files
+    else:    # non-Amber-style topology files
         structure = md.load(top_file)    # supports file formats with combined trajectory/topology information, like .pdb
     resSeq_list = np.zeros(resi_list.shape[0])
     for i, n in enumerate(resi_list):
         if top_file[-7:] == '.prmtop' or top_file[-4:] == '.top':
-            resSeq_list[i] = structure.residue(int(n)).resSeq
+            resSeq_list[i] = structure.residue(int(n)).resSeq    # if we loaded an Amber-style topology, structure is already a toplogy object
         else:
-            resSeq_list[i] = structure.top.residue(int(n)).resSeq
+            resSeq_list[i] = structure.top.residue(int(n)).resSeq    # if we loaded a trajectory, structure.top is the topology object
 
     return resSeq_list
 

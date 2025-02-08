@@ -57,11 +57,13 @@ def get_resi_mapping(inds_file, top_File):
     multimers), but rather the index according to the topology. 
     """
     inds = np.loadtxt(inds_file, delimiter=",")
+
+    # Handle support for Amber-style topology files
     if top_File[-7:] == '.prmtop' or top_File[-4:] == '.top':
-        structure = md.load_prmtop(top_File)
+        structure = md.load_prmtop(top_File)    # mdtraj.load only supports trajectories, but we only need topology information here
         n_resis = structure.n_residues
-    else:
-        structure = md.load(top_File)
+    else:    # non-Amber style topology files
+        structure = md.load(top_File)    # supports file formats with combined trajectory/topology information, like .pdb
         n_resis = structure.top.n_residues
     n_dihedrals = inds.shape[0]
     resi_map = np.zeros(n_dihedrals)
@@ -111,10 +113,11 @@ def save_dihedral_entropy(entropy_values, resi_map, output_name):
     return 0 
 
 def get_residue_seqIds(resi_list, top_file):
+    # Handle support for Amber-style topology files
     if top_file[-7:] == '.prmtop' or top_file[-4:] == '.top':
-        structure = md.load_prmtop(top_file)
-    else:
-        structure = md.load(top_file)
+        structure = md.load_prmtop(top_file)    # mdtraj.load only supports trajectories, but we only need topology information here
+    else:    # non-Amber style topology files
+        structure = md.load(top_file)    # supports file formats with combined trajectory/topology information, like .pdb
     resSeq_list = np.zeros(resi_list.shape[0])
     for i, n in enumerate(resi_list):
         if top_file[-7:] == '.prmtop' or top_file[-4:] == '.top':
